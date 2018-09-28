@@ -20,12 +20,11 @@ jobs:
         - run:
               name: test
               command: npm test
-    major:
+    publish:
         steps:
         - run:
-              name: update version
-              command: npm major
-    publish:
+              name: update npm version
+              command: npm version $CIRCLE_TAG
         - run:
               name: authenticate with npm
               command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/app/.npmrc
@@ -36,24 +35,13 @@ workflows:
     version: 2
     build-publish:
         jobs:
-          - build
-          - major:
-              requires:
-                - build
-              filters:
-                tags:
-                  only: /^v.?/
-          -minor:
-              requires:
-                - build
-              filters:
-                tags:
-                  only: /^v.?/
-          - publish:
-              requires:
-                - build
+          - build:
               filters:
                 tags:
                   only: /^v.*/
                 branches:
                   ignore: /.*/
+          - publish:
+              requires:
+                - build
+
