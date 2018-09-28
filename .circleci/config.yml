@@ -1,0 +1,42 @@
+version: 2
+
+defaults:
+  docker:
+    - image: circleci/node:10
+
+jobs:
+    build:
+        steps:
+        - checkout
+        - run:
+              name: install
+              command: npm install
+        - run:
+              name: build
+              command: npm run build
+        - run:
+              name: docs
+              command: npm run docs
+        - run:
+              name: test
+              command: npm test
+    deploy:
+        - run:
+              name: Authenticate with npm
+              command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+        - run:
+              name: Publish package
+              command: npm publish
+workflows:
+    version: 2
+    build-deploy:
+        jobs:
+          - build
+          - deploy:
+              requires:
+                - build
+              filters:
+                tags:
+                  only: /^v.*/
+                branches:
+                  ignore: /.*/

@@ -1,0 +1,32 @@
+{
+  "name": "npm-publish-test",
+  "version": "0.0.1",
+  "description": "It doesn't really do much",
+  "license": "ISC",
+  "scripts": {
+    "start": "node dist/index.js",
+    "docs": "node_modules/.bin/swaggerGen -c ./swaggerConfig.json",
+    "build": "tsc",
+    "test": "node_modules/.bin/mocha --require ts-node/register \"tests/**/*.test.ts*\"",
+    "watch-test": "onchange \"tests/**/*.ts\" \"src/**/*.ts\" -i -- npm test",
+    "lint": "tslint -p tslint.json",
+    "watch-lint": "onchange \"tests/**/*.ts\" \"src/**/*.ts\" -i -- npm run lint",
+    "docs-build-start": "npm run docs && npm run build && npm run start",
+    "serve": "onchange \"src/**/*.ts\" -i -- npm run docs-build-start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IncentroJesse/Auto-NPM-publish-test.git"
+  },
+  "dependencies": {
+    "typescript-rest-swagger": "0.0.20"
+  },
+  "devDependencies": {
+    "@cxcloud/ct-types": "^0.3.2",
+    "@types/chai": "^4.1.4",
+    "onchange": "^4.1.0",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3"
+  }
+}

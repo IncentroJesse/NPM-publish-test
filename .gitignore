@@ -1,0 +1,7 @@
+# Jetbrains IDE's stuff
+.idea/
+
+# Compile code
+dist/
+
+node_modules/
