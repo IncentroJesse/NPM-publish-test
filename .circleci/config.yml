@@ -15,11 +15,8 @@ jobs:
               name: build
               command: npm run build
         - run:
-              name: docs
-              command: npm run docs
-        - run:
-              name: test
-              command: npm test
+              name: prepublish
+              command: npm run prepublishOnly
     publish:
         steps:
         - run:
