@@ -27,7 +27,7 @@ jobs:
               command: npm version $CIRCLE_TAG
         - run:
               name: authenticate with npm
-              command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/app/.npmrc
+              command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
         - run:
               name: publish package
               command: npm publish
