@@ -20,19 +20,36 @@ jobs:
         - run:
               name: test
               command: npm test
-    deploy:
+    major:
+        steps:
         - run:
-              name: Authenticate with npm
-              command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+              name: update version
+              command: npm major
+    publish:
         - run:
-              name: Publish package
+              name: authenticate with npm
+              command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/app/.npmrc
+        - run:
+              name: publish package
               command: npm publish
 workflows:
     version: 2
-    build-deploy:
+    build-publish:
         jobs:
           - build
-          - deploy:
+          - major:
+              requires:
+                - build
+              filters:
+                tags:
+                  only: /^v.?/
+          -minor:
+              requires:
+                - build
+              filters:
+                tags:
+                  only: /^v.?/
+          - publish:
               requires:
                 - build
               filters:
