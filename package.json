@@ -1,6 +1,6 @@
 {
   "name": "incentrojesses-npm-publish-test",
-  "version": "0.0.0-development",
+  "version": "5.0.0",
   "description": "It doesn't really do much",
   "license": "ISC",
   "scripts": {
@@ -26,7 +26,6 @@
     "@cxcloud/ct-types": "^0.3.2",
     "@types/chai": "^4.1.4",
     "onchange": "^4.1.0",
-    "semantic-release": "^15.9.16",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "typescript": "^3.0.3"
